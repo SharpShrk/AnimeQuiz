@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c6eb35fa3da7f3448c5e5177b0edfc1, type: 3}
+  m_Name: Question_33
+  m_EditorClassIdentifier: 
+  QuestionTittle: 
+  QuestionImage: {fileID: 0}
+  QuestionText: 
+  QuestionAudio: {fileID: 8300000, guid: 1ac7a452d2962a14db42e3a767a904c4, type: 3}
+  Answers:
+  - AnswerText: "\u0410\u043D\u0433\u0435\u043B\u044C\u0441\u043A\u0438\u0435 \u0440\u0438\u0442\u043C\u044B!"
+    AnswerImage: {fileID: 0}
+    AnswerAudio: {fileID: 0}
+    IsCorrect: 1
+  - AnswerText: "\u041F\u0440\u0438\u043D\u0446\u0435\u0441\u0441\u0430 \u041C\u043E\u043D\u043E\u043D\u043E\u043A\u0435"
+    AnswerImage: {fileID: 0}
+    AnswerAudio: {fileID: 0}
+    IsCorrect: 0
+  - AnswerText: "\u041F\u0441\u0438\u0445\u043E\u043F\u0430\u0441\u043F\u043E\u0440\u0442"
+    AnswerImage: {fileID: 0}
+    AnswerAudio: {fileID: 0}
+    IsCorrect: 0
+  - AnswerText: "\u0421\u0442\u0430\u043B\u044C\u043D\u043E\u0439 \u0430\u043B\u0445\u0438\u043C\u0438\u043A"
+    AnswerImage: {fileID: 0}
+    AnswerAudio: {fileID: 0}
+    IsCorrect: 0

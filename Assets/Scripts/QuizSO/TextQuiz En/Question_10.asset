@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c6eb35fa3da7f3448c5e5177b0edfc1, type: 3}
+  m_Name: Question_10
+  m_EditorClassIdentifier: 
+  QuestionTittle: 'Noragami: Stray God'
+  QuestionImage: {fileID: 0}
+  QuestionText: What is the name of the god striving to become famous and have his
+    own shrine?
+  QuestionAudio: {fileID: 0}
+  Answers:
+  - AnswerText: Yato
+    AnswerImage: {fileID: 0}
+    AnswerAudio: {fileID: 0}
+    IsCorrect: 1
+  - AnswerText: Bishamon
+    AnswerImage: {fileID: 0}
+    AnswerAudio: {fileID: 0}
+    IsCorrect: 0
+  - AnswerText: Kofuku
+    AnswerImage: {fileID: 0}
+    AnswerAudio: {fileID: 0}
+    IsCorrect: 0
+  - AnswerText: Takemikazuchi
+    AnswerImage: {fileID: 0}
+    AnswerAudio: {fileID: 0}
+    IsCorrect: 0

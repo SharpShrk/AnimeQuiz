@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c6eb35fa3da7f3448c5e5177b0edfc1, type: 3}
+  m_Name: Question_11
+  m_EditorClassIdentifier: 
+  QuestionTittle: "\u0411\u0435\u0437\u0434\u043E\u043C\u043D\u044B\u0439 \u0431\u043E\u0433"
+  QuestionImage: {fileID: 0}
+  QuestionText: "\u041A\u0430\u043A \u043D\u0430\u0437\u044B\u0432\u0430\u0435\u0442\u0441\u044F
+    \u043E\u0440\u0443\u0436\u0438\u0435, \u043A\u043E\u0442\u043E\u0440\u044B\u043C
+    \u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442\u0441\u044F \u042F\u0442\u043E?"
+  QuestionAudio: {fileID: 0}
+  Answers:
+  - AnswerText: "\u042E\u043A\u0438\u043D\u044D"
+    AnswerImage: {fileID: 0}
+    AnswerAudio: {fileID: 0}
+    IsCorrect: 1
+  - AnswerText: "\u0421\u0430\u043A\u0443\u0440\u0430"
+    AnswerImage: {fileID: 0}
+    AnswerAudio: {fileID: 0}
+    IsCorrect: 0
+  - AnswerText: "\u0425\u0438\u0451\u0440\u0438"
+    AnswerImage: {fileID: 0}
+    AnswerAudio: {fileID: 0}
+    IsCorrect: 0
+  - AnswerText: "\u041A\u0430\u0437\u0443\u043C\u0430"
+    AnswerImage: {fileID: 0}
+    AnswerAudio: {fileID: 0}
+    IsCorrect: 0

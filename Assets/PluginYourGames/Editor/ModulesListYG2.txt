@@ -1,0 +1,13 @@
+Authorization v1.01
+AutoTranslateLangs v1.002
+EnvirData v1.002
+Flags v1.001
+InterstitialAdv v1.002
+Leaderboards v1.0
+Localization v1.001
+Metrica v1.01
+Payments v1.01
+PlayerStats v1.001
+QuitGameEvent v1.001
+Review v1.0
+RewardedAdv v1.001
