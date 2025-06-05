@@ -23,13 +23,13 @@ public class ADManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        
     }
 
     private void Start()
     {
         _adsTimer = new WaitForSeconds(_timerBetweenAD);
         _isCanShowInterAD = true;
-
         CheckDisableInterstitialAds();
     }
 

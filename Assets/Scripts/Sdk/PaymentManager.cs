@@ -18,7 +18,7 @@ public class PaymentManager : MonoBehaviour
     {
         _closeButton.onClick.AddListener(HideMarket);
         _marketButton.onClick.AddListener(OpenMarket);
-        YG2.onPurchaseSuccess += SuccessPurchased;
+        YG2.onPurchaseSuccess += SuccessPurchased;       
     }
 
     private void OnDisable()
@@ -30,7 +30,7 @@ public class PaymentManager : MonoBehaviour
 
     private void Start()
     {
-        if(YG2.GetState(PurchaseStatusName) == 1)
+        if (YG2.GetState(PurchaseStatusName) == 1)
         {
             _marketButton.interactable = false;
         }

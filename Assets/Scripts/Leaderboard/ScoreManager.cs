@@ -50,7 +50,7 @@ public class ScoreManager : MonoBehaviour
                 break;
         }
         
-        _score = YG2.GetState(_scoreKey);
+        //_score = YG2.GetState(_scoreKey);
         _questionsCount = questionsCount;
     }
 
@@ -113,7 +113,7 @@ public class ScoreManager : MonoBehaviour
     private void SaveScore()
     {
         YG2.SetState(_scoreKey, _score);
-        Leaderboard.Instance.TrySaveHighScore();
+        ScoreSaver.Instance.TrySaveHighScore();
     }
 
     private void OpenScorePanel()

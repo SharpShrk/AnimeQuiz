@@ -1,5 +1,5 @@
 using System.Collections;
-using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
@@ -8,20 +8,14 @@ using YG.Utils.LB;
 
 public class Leaderboard : MonoBehaviour
 {
-    public static Leaderboard Instance { get; private set; }
-
-    private const string AudioQuizHighScoreKey = "AudioQuizHighScore";
-    private const string ImageQuizHighScoreKey = "ImageQuizHighScore";
-    private const string TextQuizHighScoreKey = "TextQuizHighScore";
-    private const string LeaderboardScoreKey = "TotalHighScore";
     private const string LeaderboardName = "AnimeQuiz";
 
     [Header("Settings")]
     [SerializeField] private LeaderboardYG _leaderboardYGComponent;
-    [SerializeField] private GameObject _leaderboardPanel;
-    [SerializeField] private GameObject _gameUI;
     [SerializeField] private Button _openLeaderboardButton;
     [SerializeField] private Button _closeLeaderboardButton;
+    [SerializeField] private GameObject _leaderboardPanel;
+    [SerializeField] private GameObject _gameUI;
 
     [Header("PlayerData")]
     [SerializeField] private GameObject _playerDataObject;
@@ -31,61 +25,30 @@ public class Leaderboard : MonoBehaviour
 
     private LBCurrentPlayerData _currentPlayerData;
     private Sprite _playerPhotoSprite;
+
     private string _playerRank;
     private string _playerScore;
     private string _playerName;
 
     public Sprite PlayerPhotoSprite => _playerPhotoSprite;
 
-    private void Awake()
+    private void Start()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
+        YG2.GetLeaderboard(LeaderboardName);
     }
 
     private void OnEnable()
     {
         _openLeaderboardButton.onClick.AddListener(OpenLeaderboardPanel);
         _closeLeaderboardButton.onClick.AddListener(CloseLeaderboardPanel);
-
         YG2.onGetLeaderboard += OnUpdateLB;
-        YG2.GetLeaderboard(LeaderboardName);
     }
 
     private void OnDisable()
     {
-        _openLeaderboardButton.onClick.RemoveListener(OpenLeaderboardPanel);
-        _closeLeaderboardButton.onClick.RemoveListener(CloseLeaderboardPanel);
-
+        _openLeaderboardButton.onClick.RemoveAllListeners();
+        _closeLeaderboardButton.onClick.RemoveAllListeners();
         YG2.onGetLeaderboard -= OnUpdateLB;
-    }
-
-    public void TrySaveHighScore()
-    {
-        int audioHighScore = YG2.GetState(AudioQuizHighScoreKey);
-        int imageHighScore = YG2.GetState(ImageQuizHighScoreKey);
-        int textHighScore = YG2.GetState(TextQuizHighScoreKey);
-
-        int totalScore = audioHighScore + imageHighScore + textHighScore;
-
-        int savedTotalHighScore = YG2.GetState(LeaderboardScoreKey);
-
-        if (totalScore > savedTotalHighScore)
-        {
-            YG2.SetState(LeaderboardScoreKey, totalScore);
-            SaveToLeaderboard(totalScore);
-        }
-    }
-
-    private void SaveToLeaderboard(int score)
-    {
-        YG2.SetLeaderboard(LeaderboardName, score);
     }
 
     private void OnUpdateLB(LBData lbData)
@@ -114,6 +77,8 @@ public class Leaderboard : MonoBehaviour
 
     private void OpenLeaderboardPanel()
     {
+        _playerDataObject.SetActive(false);
+        YG2.GetLeaderboard(LeaderboardName);
         _leaderboardYGComponent.UpdateLB();
 
         _gameUI.SetActive(false);
@@ -122,7 +87,18 @@ public class Leaderboard : MonoBehaviour
 
         _rank.text = _playerRank;
         _score.text = _playerScore;
-        _name.text = _playerName;
+
+        if (YG2.player.auth)
+        {
+            _name.text = _playerName;
+        }
+        else
+        {
+            if (YG2.envir.language == "ru")
+                _name.text = "Аноним";
+            else
+                _name.text = "Anonymous";
+        }
     }
 
     private void CloseLeaderboardPanel()
