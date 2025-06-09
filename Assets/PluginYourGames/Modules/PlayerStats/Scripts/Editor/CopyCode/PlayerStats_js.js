@@ -9,7 +9,7 @@ function SetState(key, value) {
     try {
         var increments = {};
         increments[key] = value;
-        player.incrementStats(increments);
+        player.setStats(increments);
     } catch (e) {
         console.error('CRASH Set Stats: ', e.message);
     }

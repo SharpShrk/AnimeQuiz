@@ -6,9 +6,6 @@ using YG;
 
 public class ScoreManager : MonoBehaviour
 {
-    private const string _audioQuizScoreKey = "AudioQuizScore";
-    private const string _imageQuizScoreKey = "ImageQuizScore";
-    private const string _textQuizScoreKey = "TextScore";
     private const string _audioQuizHighScoreKey = "AudioQuizHighScore";
     private const string _imageQuizHighScoreKey = "ImageQuizHighScore";
     private const string _textQuizHighScoreKey = "TextQuizHighScore";
@@ -25,32 +22,27 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private TMP_Text _scoreValueText;
 
     private int _score = 0;
+    private int _highScore;
     private int _questionsCount;
-    private string _scoreKey;
-    private string _highScoreKey;
 
     public void Init(QuizType quizType, int questionsCount)
     {
         switch (quizType)
         {
             case QuizType.Image:
-                _scoreKey = _imageQuizScoreKey;
-                _highScoreKey = _imageQuizHighScoreKey;
+                _highScore = YG2.saves.ImageHighScore;
                 break;
             case QuizType.Text:
-                _scoreKey = _textQuizScoreKey;
-                _highScoreKey = _textQuizHighScoreKey;
+                _highScore = YG2.saves.TextHighScore;
                 break;
             case QuizType.Audio:
-                _scoreKey = _audioQuizScoreKey;
-                _highScoreKey = _audioQuizHighScoreKey;
+                _highScore = YG2.saves.AudioHighScore;
                 break;
             default:
                 Debug.LogError("Неизвестный тип вопроса");
                 break;
         }
         
-        //_score = YG2.GetState(_scoreKey);
         _questionsCount = questionsCount;
     }
 
@@ -74,20 +66,7 @@ public class ScoreManager : MonoBehaviour
     public void AddPoint()
     {
         _score++;
-        SaveScore();
-
-        int highScore = YG2.GetState(_highScoreKey);
-
-        if (_score > highScore)
-        {
-            YG2.SetState(_highScoreKey, _score);
-        }
-    }
-
-    public void ResetScore()
-    {
-        _score = 0;
-        SaveScore();
+        SaveScore();       
     }
 
     public void CheckReviewPermission()
@@ -96,7 +75,6 @@ public class ScoreManager : MonoBehaviour
             OpenReviewPanel();
         else
             OpenScorePanel();
-
     }
 
     private void OpenReviewPanel()
@@ -112,7 +90,26 @@ public class ScoreManager : MonoBehaviour
 
     private void SaveScore()
     {
-        YG2.SetState(_scoreKey, _score);
+        if (_score > _highScore)
+        {
+            switch (_quizManager.Type)
+            {
+                case QuizType.Image:
+                    YG2.saves.ImageHighScore = _score;
+                    break;
+                case QuizType.Text:
+                    YG2.saves.TextHighScore = _score;
+                    break;
+                case QuizType.Audio:
+                    YG2.saves.AudioHighScore = _score;
+                    break;
+                default:
+                    Debug.LogError("Неизвестный тип вопроса");
+                    break;
+            }
+        }
+
+        YG2.SaveProgress();
         ScoreSaver.Instance.TrySaveHighScore();
     }
 
@@ -140,7 +137,6 @@ public class ScoreManager : MonoBehaviour
 
     private void OnButtonExitMenuClick()
     {
-        SaveScore();
         SceneManager.LoadScene(_startSceneName);
     }
 

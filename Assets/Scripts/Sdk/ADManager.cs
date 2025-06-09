@@ -12,6 +12,7 @@ public class ADManager : MonoBehaviour
     private bool _isCanShowInterAD;
     private bool _isInterAdsDisabled;
     private float _timerBetweenAD = 61f;
+    private Coroutine _timerCoroutineAD;
 
     private void Awake()
     {
@@ -28,8 +29,14 @@ public class ADManager : MonoBehaviour
 
     private void Start()
     {
+        _isCanShowInterAD = false;
+
+        if (_timerCoroutineAD != null)
+            StopCoroutine(_timerCoroutineAD);
+
+        _timerCoroutineAD = StartCoroutine(AdCooldownCoroutine());
+
         _adsTimer = new WaitForSeconds(_timerBetweenAD);
-        _isCanShowInterAD = true;
         CheckDisableInterstitialAds();
     }
 
@@ -64,7 +71,11 @@ public class ADManager : MonoBehaviour
     {
         YG2.InterstitialAdvShow();
         _isCanShowInterAD = false;
-        StartCoroutine(AdCooldownCoroutine());
+
+        if (_timerCoroutineAD != null)
+            StopCoroutine(_timerCoroutineAD);
+
+        _timerCoroutineAD = StartCoroutine(AdCooldownCoroutine());
     }
 
     private IEnumerator AdCooldownCoroutine()

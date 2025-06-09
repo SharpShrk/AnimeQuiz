@@ -11,3 +11,4 @@ PlayerStats v1.001
 QuitGameEvent v1.001
 Review v1.0
 RewardedAdv v1.001
+Storage v1.01

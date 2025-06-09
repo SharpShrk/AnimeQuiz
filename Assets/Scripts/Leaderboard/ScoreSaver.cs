@@ -6,10 +6,6 @@ public class ScoreSaver : MonoBehaviour
 {
     public static ScoreSaver Instance { get; private set; }
 
-    private const string AudioQuizHighScoreKey = "AudioQuizHighScore";
-    private const string ImageQuizHighScoreKey = "ImageQuizHighScore";
-    private const string TextQuizHighScoreKey = "TextQuizHighScore";
-    private const string LeaderboardScoreKey = "TotalHighScore";
     private const string LeaderboardName = "AnimeQuiz";
 
     private void Awake()
@@ -26,18 +22,20 @@ public class ScoreSaver : MonoBehaviour
 
     public void TrySaveHighScore()
     {
-        int audioHighScore = YG2.GetState(AudioQuizHighScoreKey);
-        int imageHighScore = YG2.GetState(ImageQuizHighScoreKey);
-        int textHighScore = YG2.GetState(TextQuizHighScoreKey);
+        int audioHighScore = YG2.saves.AudioHighScore;
+        int imageHighScore = YG2.saves.ImageHighScore;
+        int textHighScore = YG2.saves.TextHighScore;
 
         int totalScore = audioHighScore + imageHighScore + textHighScore;
 
-        int savedTotalHighScore = YG2.GetState(LeaderboardScoreKey);
+        int savedTotalHighScore = YG2.saves.TotalScore;
 
         if (totalScore > savedTotalHighScore)
         {
-            YG2.SetState(LeaderboardScoreKey, totalScore);
+            YG2.saves.TotalScore = totalScore;
             YG2.SetLeaderboard(LeaderboardName, totalScore);
+
+            YG2.SaveProgress();
         }
     }
 }

@@ -3,18 +3,15 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
 using YG;
+using YG.Insides;
 
 public class MainMenuManager : MonoBehaviour
 {
     private static readonly string[] _ruLocale = { "ru", "be", "kk", "uk", "uz" };
 
-    private const string TextQuizScoreKey = "TextQuizHighScore";
-    private const string ImageQuizScoreKey = "ImageQuizHighScore";
-    private const string AudioQuizScoreKey = "AudioQuizHighScore";
     private const string TextQuizSceneName = "TextQuizScene";
     private const string ImageQuizSceneName = "ImageQuizScene";
     private const string AudioQuizSceneName = "AudioQuizScene";
-    private const string IsFirstStartName = "IsFirstStart";
 
     [SerializeField] private Autorization _autorization;
     [SerializeField] private TMP_Text _imageQuizScoreText;
@@ -37,30 +34,23 @@ public class MainMenuManager : MonoBehaviour
     {
         _startImageQuizButton.onClick.RemoveListener(StartImageQuiz);
         _startTextQuizButton.onClick.RemoveListener(StartTextQuiz);
+        _startAudioQuizButton.onClick.RemoveListener(StartAudioQuiz);
     }
 
     private void Start()
     {
-        if (!YG2.player.auth)
-            _autorization.OpenAutorizationPanel();
-
+        YG2.onGetSDKData += OnDataLoaded;
         CheckLanguage();
-        FirstStartCheck();
-        LoadHighScores();
+        YGInsides.LoadProgress();
+
+        if (!YG2.player.auth)
+            _autorization.OpenAutorizationPanel(); 
     }
 
-    private void FirstStartCheck()
+    private void OnDataLoaded()
     {
-        int state = YG2.GetState(IsFirstStartName);
-
-        if (state != 1)
-        {
-            YG2.SetState(IsFirstStartName, 1);
-
-            YG2.SetState(TextQuizScoreKey, 0);
-            YG2.SetState(ImageQuizScoreKey, 0);
-            YG2.SetState(AudioQuizScoreKey, 0);
-        }
+        YG2.onGetSDKData -= OnDataLoaded;
+        LoadHighScores();
     }
 
     private void CheckLanguage()
@@ -94,13 +84,9 @@ public class MainMenuManager : MonoBehaviour
 
     private void LoadHighScores()
     {
-        int imageScore = YG2.GetState(ImageQuizScoreKey);
-        int audioScore = YG2.GetState(AudioQuizScoreKey);
-        int secretScore = YG2.GetState(TextQuizScoreKey);
-
-        _imageQuizScoreText.text = SetColorScore(imageScore);
-        _audioQuizScoreText.text = SetColorScore(audioScore);
-        _textQuizScoreText.text = SetColorScore(secretScore);
+        _imageQuizScoreText.text = SetColorScore(YG2.saves.ImageHighScore);
+        _audioQuizScoreText.text = SetColorScore(YG2.saves.AudioHighScore);
+        _textQuizScoreText.text = SetColorScore(YG2.saves.TextHighScore);
     }
 
     private string SetColorScore(int score)

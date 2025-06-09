@@ -26,13 +26,13 @@ public class QuizManager : MonoBehaviour
     private bool _isRu;
 
     public bool IsRu => _isRu;
+    public QuizType Type => _quizType;
 
     private void Start()
     {
         SetLanguageQuestion();
 
         _scoreManager.Init(_quizType, _currentQuestions.Count);
-        _scoreManager.ResetScore();
 
         _waitForSeconds = new WaitForSeconds(_delayAfterAnswer);
         _maxQuestionsNumber = _currentQuestions.Count;

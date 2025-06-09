@@ -142,7 +142,7 @@ MonoBehaviour:
       value: 2
   InterstitialAdv:
     showFirstAdv: 1
-    interAdvInterval: 0
+    interAdvInterval: 60
     postponeCallByFail: 1
     postponeCallTimer: 10
     labelAdvSimLabel: 0
@@ -356,6 +356,11 @@ MonoBehaviour:
     rewardedAfterClosing: 1
     skipInterAdvAfterReward: 1
     labelAdvSimLabel: 0
+  Storage:
+    saveLocal: 0
+    saveCloud: 1
+    saveCloudInterval: 0
+    flush: 0
   Basic:
     platform: {fileID: 11400000, guid: c2a303d33a9fd394bae4c4b88b9a1c44, type: 2}
     autoApplySettings: 1
@@ -411,6 +416,8 @@ MonoBehaviour:
     useYandexMetrica: 0
     metricaCounterID: 0
     skipInterAdvAfterReward: 0
+    saveLocal: 0
+    saveCloud: 0
     selectWebGLTemplate: 1
     runInBackground: 1
     enableExceptions: 1
